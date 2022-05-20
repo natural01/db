@@ -24,19 +24,19 @@ GO
 --2. Выдать оценки студентов по информатике если они обучаются данному предмету. Оформить выдачу данных с использованием --view.
 
 
-CREATE VIEW  informatiñ_mark
+CREATE VIEW  informatin_mark
 AS
 	SELECT [mark].mark, [student].name 
 	FROM [mark]
 	LEFT JOIN [student] ON [mark].id_student = [student].id_student
 	LEFT JOIN [lesson] ON [mark].id_lesson = [lesson].id_lesson
 	LEFT JOIN [subject] ON [lesson].id_subject = [subject].id_subject
-	WHERE [subject].name = 'Èíôîðìàòèêà'
+	WHERE [subject].name = 'Информатика'
 GO
 
-SELECT * FROM informatiñ_mark;
+SELECT * FROM informatin_mark;
 
-DROP VIEW informatiñ_mark;
+DROP VIEW informatin_mark;
 GO
 
 --3. Дать информацию о должниках с указанием фамилии студента и названия предмета.
@@ -65,7 +65,7 @@ EXECUTE get_debtors @id_group = 4;
 
 DROP PROCEDURE get_debtors;
 
---4. Дать среднюю оценку студентов по каждому предмету для тех предметов, по которым занимается не менее 3 5 студентов.
+--4. Дать среднюю оценку студентов по каждому предмету для тех предметов, по которым занимается не менее 35 студентов.
 
 GO
 
@@ -94,7 +94,7 @@ CREATE VIEW VM_students_marks AS
 	LEFT JOIN [lesson] ON [group].id_group = [lesson].id_group
 	LEFT JOIN [mark] ON ([student].id_student = [mark].id_student AND [lesson].id_lesson = mark.id_lesson)
 	LEFT JOIN [subject] ON [lesson].id_subject = [subject].id_subject
-	WHERE [group].name = 'ÂÌ'
+	WHERE [group].name = 'ВМ'
 GO
 
 SELECT * FROM VM_students_marks;
@@ -112,7 +112,7 @@ LEFT JOIN [student] ON [mark].id_student = [student].id_student
 LEFT JOIN [group] ON [student].id_group = [group].id_group
 LEFT JOIN [lesson] ON [mark].id_lesson = [lesson].id_lesson
 LEFT JOIN [subject] ON [lesson].id_subject = [subject].id_subject
-WHERE [group].name = 'ÏÑ' AND [subject].name = 'ÁÄ' AND [lesson].date < '2019-05-12' AND [mark].mark < 5
+WHERE [group].name = 'ПС' AND [subject].name = 'БД' AND [lesson].date < '2019-05-12' AND [mark].mark < 5
 
 SELECT * FROM [mark];
 
